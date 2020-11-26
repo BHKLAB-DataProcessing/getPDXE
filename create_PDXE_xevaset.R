@@ -1,10 +1,9 @@
 library(Xeva)
 library(Biobase)
 
-setwd("~/Desktop/PDXE_xevaSet-main")
-model <- read.csv("data/raw_data/model_info.csv")
-experiment <- read.csv("data/raw_data/expriment.csv")
-drugInfo <- read.csv("data/raw_data/drug_info.csv")
+model <- read.csv("/pfs/getPDXE/model_info.csv")
+experiment <- read.csv("/pfs/getPDXE/expriment.csv")
+drugInfo <- read.csv("/pfs/getPDXE/drug_info.csv")
 
 control.drug <- "untreated"
 drugs <- unique(model$drug)
@@ -25,12 +24,12 @@ for(p in unique(model$patient.id))
 }
 
 ###----------------
-modToBiobaseMap <- read.csv("data/raw_data/modToBiobaseMap.csv")
+modToBiobaseMap <- read.csv("/pfs/getPDXE/modToBiobaseMap.csv")
 
 ##-----read mol data ---
-RNASeq <- readRDS("data/raw_data/molProf_RNASeq.rds")
-cnv <- readRDS("data/raw_data/molProf_cnv.rds")
-mutation <- readRDS("data/raw_data/molProf_mutation.rds")
+RNASeq <- readRDS("/pfs/getPDXE/molProf_RNASeq.rds")
+cnv <- readRDS("/pfs/getPDXE/molProf_cnv.rds")
+mutation <- readRDS("/pfs/getPDXE/molProf_mutation.rds")
 
 ##-----check if ids are matching ----
 
@@ -65,6 +64,6 @@ for(tissue in c("Breast Cancer", "Colorectal Cancer", "Cutaneous Melanoma",
 {
   pdxe.tissue <- subsetXeva(pdxe, ids= mi$model.id[mi$tissue.name==tissue],
                             id.name = "model.id")
-  saveRDS(pdxe.tissue, sprintf("data/PDXE_xevaSet/PDXE_%s_XevaSet.rds", gsub(" ", "_", tissue)))
+  saveRDS(pdxe.tissue, sprintf("/pfs/out/PDXE_%s_XevaSet.rds", gsub(" ", "_", tissue)))
 }
 
