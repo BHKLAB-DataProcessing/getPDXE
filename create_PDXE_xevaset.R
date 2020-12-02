@@ -55,15 +55,5 @@ for(res in c("mRECIST", "slope", "AUC", "angle", "abc", "TGI"))
   pdxe <- setResponse(pdxe, res.measure = res, verbose=TRUE)
 }
 
-
-##=========subset by tissue type ====
-mi <- modelInfo(pdxe)
-for(tissue in c("Breast Cancer", "Colorectal Cancer", "Cutaneous Melanoma",
-                "Gastric Cancer", "Non-small Cell Lung Carcinoma",
-                "Pancreatic Ductal Carcinoma"))
-{
-  pdxe.tissue <- subsetXeva(pdxe, ids= mi$model.id[mi$tissue.name==tissue],
-                            id.name = "model.id")
-  saveRDS(pdxe.tissue, sprintf("/pfs/out/PDXE_%s_XevaSet.rds", gsub(" ", "_", tissue)))
-}
+saveRDS(pdxe, "/pfs/out/Xeva_PDXE.rds")
 
