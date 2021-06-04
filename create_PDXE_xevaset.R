@@ -312,4 +312,4 @@ bco <- biocompute::compose_v1.3.0(
   execution, parametric, io, error
 )
 bco %>% convert_json() %>% export_json("/pfs/out/PDXE_BCO.json") %>% validate_checksum()
-
+ 
